@@ -46,3 +46,34 @@ The Farm Management System is a Spring Boot application designed to manage vario
    ```bash
    git clone https://github.com/yourusername/farm-management-system.git
    cd farm-management-system
+
+2. Configure the Database
+ - Create a new MySQL database. 
+ - Update the `application.properties` file with your database credentials.
+
+   ```properties
+   spring.datasource.url=jdbc:mysql://localhost:3306/your_database_name
+   spring.datasource.username=your_username
+   spring.datasource.password=your_password
+   spring.jpa.hibernate.ddl-auto=update
+
+```agsl
+mvn clean install
+
+```   
+
+```agsl
+mvn spring-boot:run
+
+```
+
+```agsl
+http://localhost:8080/api
+
+```
+
+- Create a Farm: POST /farms
+- Get All Farms: GET /farms
+- Get Farm by ID: GET /farms/{id}
+- Update a Farm: PUT /farms/{id}
+- Delete a Farm: DELETE /farms/{id}
