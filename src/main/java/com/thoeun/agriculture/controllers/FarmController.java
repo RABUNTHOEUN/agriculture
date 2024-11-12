@@ -2,7 +2,7 @@ package com.thoeun.agriculture.controllers;
 
 import com.thoeun.agriculture.models.Farm;
 import com.thoeun.agriculture.services.FarmService.FarmServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,10 +11,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/farms")
+@AllArgsConstructor
 public class FarmController {
 
-    @Autowired
-    private FarmServiceImpl farmService;
+
+    private final FarmServiceImpl farmService;
 
     @PostMapping
     public ResponseEntity<Farm> createFarm(@RequestBody Farm farm) {

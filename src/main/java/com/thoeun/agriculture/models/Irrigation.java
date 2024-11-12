@@ -1,5 +1,6 @@
 package com.thoeun.agriculture.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -19,6 +20,7 @@ public class Irrigation {
 
     @ManyToOne
     @JoinColumn(name = "field_id", nullable = false)
+    @JsonBackReference
     private Field field;
 
     private LocalDate irrigationDate;

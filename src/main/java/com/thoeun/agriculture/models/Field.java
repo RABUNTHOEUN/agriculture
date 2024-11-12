@@ -1,4 +1,6 @@
 package com.thoeun.agriculture.models;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,6 +23,7 @@ public class Field {
 
     @ManyToOne
     @JoinColumn(name = "farm_id", nullable = false)
+    @JsonBackReference
     private Farm farm;
 
     private String fieldName;
@@ -28,12 +31,15 @@ public class Field {
     private String cropType;
 
     @OneToMany(mappedBy = "field", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Crop> crops = new ArrayList<>();
 
     @OneToMany(mappedBy = "field", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Soil> soilTests = new ArrayList<>();
 
     @OneToMany(mappedBy = "field", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Irrigation> irrigations = new ArrayList<>();
 
     // Getters and Setters

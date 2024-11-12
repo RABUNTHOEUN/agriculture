@@ -1,4 +1,5 @@
 package com.thoeun.agriculture.models;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,6 +21,7 @@ public class Soil {
 
     @ManyToOne
     @JoinColumn(name = "field_id", nullable = false)
+    @JsonBackReference
     private Field field;
 
     private BigDecimal pH;

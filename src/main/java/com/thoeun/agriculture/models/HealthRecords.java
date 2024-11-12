@@ -1,4 +1,5 @@
 package com.thoeun.agriculture.models;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,6 +20,7 @@ public class HealthRecords {
 
     @ManyToOne
     @JoinColumn(name = "livestock_id", nullable = false)
+    @JsonBackReference
     private Livestock livestock;
 
     private LocalDate checkupDate;

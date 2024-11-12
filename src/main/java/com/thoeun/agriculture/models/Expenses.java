@@ -1,5 +1,6 @@
 package com.thoeun.agriculture.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,6 +22,7 @@ public class Expenses {
 
     @ManyToOne
     @JoinColumn(name = "farm_id", nullable = false)
+    @JsonBackReference
     private Farm farm;
 
     private String expenseType;

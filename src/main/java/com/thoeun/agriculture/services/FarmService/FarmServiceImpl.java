@@ -4,20 +4,17 @@ package com.thoeun.agriculture.services.FarmService;
 import com.thoeun.agriculture.exceptions.ResourceNotFoundException;
 import com.thoeun.agriculture.models.Farm;
 import com.thoeun.agriculture.repository.FarmRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 
 @Service
+@AllArgsConstructor
 public class FarmServiceImpl implements FarmService {
 
     private final FarmRepository farmRepository;
-
-    public FarmServiceImpl(FarmRepository farmRepository) {
-        this.farmRepository = farmRepository;
-    }
 
     @Override
     public Farm createFarm(Farm farm) {
