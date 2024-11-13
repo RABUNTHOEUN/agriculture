@@ -2,6 +2,7 @@ package com.thoeun.agriculture.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,10 +26,22 @@ public class Sales {
     @JsonBackReference
     private Farm farm;
 
+    @NotNull(message = "Product name is required")
     private String productName;
+
+    @NotNull(message = "Quantity sold is required")
+    @Positive(message = "Quantity sold must be positive")
     private BigDecimal quantitySold;
+
+    @NotNull(message = "Sale date is required")
+    @PastOrPresent(message = "Sale date cannot be in the future")
     private LocalDate saleDate;
+
+    @NotNull(message = "Revenue is required")
+    @Positive(message = "Revenue must be positive")
     private BigDecimal revenue;
+
+    @NotNull(message = "Buyer name is required")
     private String buyerName;
 
     // Getters and Setters

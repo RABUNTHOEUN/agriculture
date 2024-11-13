@@ -1,6 +1,10 @@
 package com.thoeun.agriculture.models;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PastOrPresent;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,7 +15,7 @@ import java.time.LocalDate;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "health_recodes")
+@Table(name = "health_records")
 public class HealthRecords {
 
     @Id
@@ -23,10 +27,20 @@ public class HealthRecords {
     @JsonBackReference
     private Livestock livestock;
 
+    @NotNull(message = "Checkup date is required")
+    @PastOrPresent(message = "Checkup date cannot be in the future")
     private LocalDate checkupDate;
+
+    @NotNull(message = "Diagnosis is required")
+    @Size(min = 3, max = 200, message = "Diagnosis must be between 3 and 200 characters")
     private String diagnosis;
+
+    @NotNull(message = "Treatment is required")
+    @Size(min = 3, max = 200, message = "Treatment must be between 3 and 200 characters")
     private String treatment;
+
+    @PastOrPresent(message = "Next checkup date cannot be in the future")
     private LocalDate nextCheckupDate;
 
-    // Getters and Setters
+    // Additional Getters and Setters if needed
 }

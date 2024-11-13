@@ -2,6 +2,9 @@ package com.thoeun.agriculture.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PastOrPresent;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,9 +27,15 @@ public class Certifications {
     @JsonBackReference
     private Farm farm;
 
+    @NotNull(message = "Certification name is required")
+    @Size(min = 3, max = 100, message = "Certification name must be between 3 and 100 characters")
     private String certificationName;
+
+    @NotNull(message = "Issue date is required")
+    @PastOrPresent(message = "Issue date cannot be in the future")
     private LocalDate issueDate;
+
     private LocalDate validUntil;
 
-    // Getters and Setters
+    // Additional Getters and Setters if needed
 }
