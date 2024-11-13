@@ -11,6 +11,7 @@ public interface IFarmService {
     List<Farm> getAllFarms();
     Farm updateFarm(Long farmId, Farm farm);
     void deleteFarm(Long farmId);
+
 }
 
 // Repeat for other entities like Field, Crop, etc.

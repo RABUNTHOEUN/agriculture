@@ -6,7 +6,7 @@ import com.thoeun.agriculture.models.Field;
 import java.util.List;
 
 public interface IFieldService {
-    Field createField(Long farmId,Field field);
+    Field createField(Field field);
     Field getFieldById(Long fieldId);
     List<Field> getAllFields();
     Field updateField(Long farmId, Field field);

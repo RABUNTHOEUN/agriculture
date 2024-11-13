@@ -8,7 +8,6 @@ import com.thoeun.agriculture.services.FarmService.IFarmService;
 import com.thoeun.agriculture.services.FieldService.IFieldService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,7 +16,7 @@ import java.util.List;
 import static org.springframework.http.HttpStatus.*;
 
 @RestController
-@RequestMapping("/api/fields")
+@RequestMapping("${api.prefix}/fields")
 @AllArgsConstructor
 public class FieldController {
 
@@ -25,14 +24,14 @@ public class FieldController {
     private final IFarmService farmService;
 
     @PostMapping
-    public ResponseEntity<ApiResponse> createField(@Valid @RequestBody Field field, @RequestParam Long farmId) {
+    public ResponseEntity<ApiResponse> createField(@Valid @RequestBody Field field) {
         try {
             try {
-                farmService.getFarmById(farmId);
+                farmService.getFarmById(field.getFarm().getFarmId());
             } catch (ResourceNotFoundException e) {
                 return ResponseEntity.status(NOT_FOUND).body(new ApiResponse(e.getMessage(), null));
             }
-            Field createdField = fieldService.createField(farmId, field);
+            Field createdField = fieldService.createField(field);
             return ResponseEntity.ok(new ApiResponse("Field create success!", createdField));
         } catch (AlreadyExistsException e) {
             return ResponseEntity.status(CONFLICT).body(new ApiResponse(e.getMessage(), null));
@@ -60,14 +59,22 @@ public class FieldController {
     }
 
     @PutMapping("/{fieldId}")
-    public ResponseEntity<Field> updateFarm(@PathVariable Long fieldId, @RequestBody Field field) {
-        Field updateField = fieldService.updateField(fieldId, field);
-        return new ResponseEntity<>(updateField, HttpStatus.OK);
+    public ResponseEntity<ApiResponse> updateFarm(@PathVariable Long fieldId, @RequestBody Field field) {
+        try {
+            Field updateField = fieldService.updateField(fieldId, field);
+            return ResponseEntity.ok(new ApiResponse("Field update success", updateField));
+        } catch (ResourceNotFoundException e) {
+            return ResponseEntity.status(NOT_FOUND).body(new ApiResponse(e.getMessage(), null));
+        }
     }
 
     @DeleteMapping("/{fieldId}")
-    public ResponseEntity<String> deleteField(@PathVariable Long fieldId) {
-        fieldService.deleteField(fieldId);
-        return ResponseEntity.ok("Field deleted successfully.");
+    public ResponseEntity<ApiResponse> deleteField(@PathVariable Long fieldId) {
+        try {
+            fieldService.deleteField(fieldId);
+            return ResponseEntity.ok(new ApiResponse("Field deleted successfully.", null));
+        } catch (ResourceNotFoundException e) {
+            return ResponseEntity.status(NOT_FOUND).body(new ApiResponse(e.getMessage(), null));
+        }
     }
 }

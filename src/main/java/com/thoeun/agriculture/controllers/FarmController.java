@@ -15,7 +15,7 @@ import java.util.List;
 import static org.springframework.http.HttpStatus.*;
 
 @RestController
-@RequestMapping("/api/farms")
+@RequestMapping("${api.prefix}/farms")
 @AllArgsConstructor
 public class FarmController {
 

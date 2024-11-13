@@ -21,8 +21,8 @@ public class FieldService implements IFieldService {
     private final IFarmService farmService;
 
     @Override
-    public Field createField(Long farmId, Field field) {
-        Farm farm = farmService.getFarmById(farmId);
+    public Field createField(Field field) {
+        Farm farm = farmService.getFarmById(field.getFarm().getFarmId());
         if (farm == null) {
             throw new ResourceNotFoundException("Farm not Fount!");
         }
@@ -38,7 +38,7 @@ public class FieldService implements IFieldService {
     @Override
     public Field getFieldById(Long fieldId) {
         return fieldRepository.findById(fieldId)
-                .orElseThrow(() -> new ResourceNotFoundException("Field Not Found" + fieldId));
+                .orElseThrow(() -> new ResourceNotFoundException("Field Not Found with ID: " + fieldId));
     }
 
     @Override
@@ -54,7 +54,7 @@ public class FieldService implements IFieldService {
             oldField.setCropType(field.getCropType());
 
             return fieldRepository.save(oldField);
-        }).orElseThrow(() -> new ResourceNotFoundException("Field not Found"));
+        }).orElseThrow(() -> new ResourceNotFoundException("Field Not Found with ID: "));
     }
 
     @Override
