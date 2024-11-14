@@ -16,8 +16,7 @@ public class WebConfig {
                 registry.addMapping("/**") // Apply to all paths
                         .allowedOrigins("*") // or .allowedOrigins("http://localhost:3000")  // Specify allowed origins
                         .allowedMethods("GET", "POST", "PUT", "DELETE") // Allow all methods
-                        .allowedHeaders("*")
-                        .allowCredentials(true);
+                        .allowedHeaders("*");
             }
         };
     }
