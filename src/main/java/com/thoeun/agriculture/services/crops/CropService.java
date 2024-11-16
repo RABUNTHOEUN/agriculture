@@ -20,7 +20,7 @@ public class CropService implements ICropService{
     private final IFieldService fieldService;
 
     @Override
-    public Crop createCrop(Crop crop) {
+    public Crop createSoil(Crop crop) {
         Field field = fieldService.getFieldById(crop.getField().getFieldId());
         if (field == null) {
             throw  new ResourceNotFoundException("Field Not Found!");

@@ -5,7 +5,7 @@ import com.thoeun.agriculture.models.Crop;
 import java.util.List;
 
 public interface ICropService {
-    Crop createCrop(Crop crop);
+    Crop createSoil(Crop crop);
     Crop getCropById(Long cropId);
     List<Crop> getAllCrops();
     Crop updateCrop(Long cropId, Crop crop);
