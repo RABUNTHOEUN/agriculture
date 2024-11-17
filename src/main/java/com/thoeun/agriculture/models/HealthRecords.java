@@ -39,7 +39,8 @@ public class HealthRecords {
     @Size(min = 3, max = 200, message = "Treatment must be between 3 and 200 characters")
     private String treatment;
 
-    @PastOrPresent(message = "Next checkup date cannot be in the future")
+    //    @PastOrPresent(message = "Next checkup date cannot be in the future")
+    @NotNull(message = "Next checkup date is required")
     private LocalDate nextCheckupDate;
 
     // Additional Getters and Setters if needed
